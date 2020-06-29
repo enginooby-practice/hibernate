@@ -9,6 +9,7 @@ import com.cpulover.hibernate.demo.entity.Student;
 public class CreateStudentTest {
 
 	public static void main(String[] args) {
+		//
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 		Session session=factory.getCurrentSession();
