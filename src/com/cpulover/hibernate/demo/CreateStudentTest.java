@@ -18,7 +18,6 @@ public class CreateStudentTest {
 			//Student student=new Student("Hiem","Ngo","cpulover@gmail.com");
 			session.beginTransaction();
 			//session.save(student);
-			System.out.println("hihi");
 			Student retrievedStudent=session.get(Student.class, 2);
 			System.out.println(retrievedStudent);
 			session.getTransaction().commit();
