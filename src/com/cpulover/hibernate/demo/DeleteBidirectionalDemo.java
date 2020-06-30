@@ -1,5 +1,7 @@
 package com.cpulover.hibernate.demo;
 
+import java.io.Serializable;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -7,7 +9,7 @@ import org.hibernate.cfg.Configuration;
 import com.cpulover.hibernate.demo.entity.Instructor;
 import com.cpulover.hibernate.demo.entity.InstructorDetail;
 
-public class DeleteDemo {
+public class DeleteBidirectionalDemo {
 
 	public static void main(String[] args) {
 		// create session factory
@@ -21,20 +23,27 @@ public class DeleteDemo {
 			// start a transaction
 			session.beginTransaction();
 
-			// get object by id
-			int id = 1;
-			Instructor tempInstructor = session.get(Instructor.class, id);
-			System.out.println("Get instructor: " + tempInstructor);
+			// get object
+			int id = 3;
+			InstructorDetail tempDetail = session.get(InstructorDetail.class, id);
+			System.out.println("Get detail: " + tempDetail);
+			
+			//break bi-directional link to delete only instructorDetail without instructor
+			tempDetail.getInstructor().setInstructorDetail(null);
 
 			// delete object
-			if (tempInstructor != null) {
-				session.delete(tempInstructor); // this will also delete the associated "instructorDetail" if
-												// CascadeType.ALL or CascadeType.REMOVE
+			if (tempDetail != null) {
+				session.delete(tempDetail); // this will also delete the associated "instructor" if
+											// CascadeType.ALL or CascadeType.REMOVE
 			}
 
 			// commit transaction
 			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
+			// handle connection leak issue
+			session.close();
 			factory.close();
 		}
 	}

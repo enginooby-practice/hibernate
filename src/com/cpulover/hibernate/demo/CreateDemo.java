@@ -27,7 +27,7 @@ public class CreateDemo {
 			session.beginTransaction();
 
 			// save objects
-			session.save(instructor1); // this will also save detail1 because of CascadeType.ALL
+			session.save(instructor1); // this will also save detail1 if CascadeType.ALL or CascadeType.PERSIST
 
 			// commit transaction
 			session.getTransaction().commit();
