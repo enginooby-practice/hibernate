@@ -24,23 +24,21 @@ public class GetDemo {
 			// start a transaction
 			session.beginTransaction();
 
-			//get object
+			// get object
 			int id = 5;
-			Instructor tempInstructor=session.get(Instructor.class, id);
-			System.out.println("Get intrustor: "+tempInstructor);
-			
-			//get associated object by one-to-many relationship
+			Instructor tempInstructor = session.get(Instructor.class, id);
+			System.out.println("Get intrustor: " + tempInstructor);
+
+			// get associated object by one-to-many relationship
 			System.out.println("List of associated courses: ");
 			System.out.println(tempInstructor.getCourses());
 
 			// commit transaction
 			session.getTransaction().commit();
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
-			//handle connection leak issue
+		} finally {
+			// handle connection leak issue
 			session.close();
 			factory.close();
 		}
