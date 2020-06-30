@@ -1,4 +1,4 @@
-package com.cpulover.hibernate.demo.entity;
+package com.cpulover.hibernate.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

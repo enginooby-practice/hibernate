@@ -1,4 +1,7 @@
-package com.cpulover.hibernate.demo.entity;
+package com.cpulover.hibernate.entity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -7,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,7 +19,7 @@ import javax.persistence.Table;
 public class Instructor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
 	@Column(name = "first_name")
 	private String firstName;
@@ -23,20 +27,34 @@ public class Instructor {
 	private String lastName;
 	@Column(name = "email")
 	private String email;
-	
-	//mapping one to one
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="instructor_detail_id")
+
+	// mapping one to one
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "instructor_detail_id")
 	private InstructorDetail instructorDetail;
-	
+
+	// mapping one to many
+	@OneToMany(mappedBy = "instructor", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH })
+	private List<Course> courses;
+
 	public Instructor() {
-		
+
 	}
 
 	public Instructor(String firstName, String lastName, String email) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+	}
+	
+	// add convenience methods for bi-directional one-to-many relationship
+	public void addCourse(Course tempCourse) {
+		if (courses==null) {
+			courses=new ArrayList<Course>();
+		} 
+		courses.add(tempCourse);
+		tempCourse.setInstructor(this);
 	}
 
 	public int getId() {
@@ -71,7 +89,6 @@ public class Instructor {
 		this.email = email;
 	}
 
-	
 	public InstructorDetail getInstructorDetail() {
 		return instructorDetail;
 	}
@@ -79,12 +96,19 @@ public class Instructor {
 	public void setInstructorDetail(InstructorDetail instructorDetail) {
 		this.instructorDetail = instructorDetail;
 	}
+	
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
 
 	@Override
 	public String toString() {
 		return "Instructor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ "]";
 	}
-	
-	
+
 }

@@ -1,15 +1,13 @@
-package com.cpulover.hibernate.demo;
-
-import java.io.Serializable;
+package com.cpulover.hibernate.onetoone;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.cpulover.hibernate.demo.entity.Instructor;
-import com.cpulover.hibernate.demo.entity.InstructorDetail;
+import com.cpulover.hibernate.entity.Instructor;
+import com.cpulover.hibernate.entity.InstructorDetail;
 
-public class GetBidirectionalDemo {
+public class CreateDemo {
 
 	public static void main(String[] args) {
 		// create session factory
@@ -20,26 +18,23 @@ public class GetBidirectionalDemo {
 		Session session = factory.getCurrentSession();
 
 		try {
+			// create objects
+			Instructor instructor1 = new Instructor("Hieu", "Ngo", "justacpulover@gmail.com");
+			InstructorDetail detail1 = new InstructorDetail("Justa Cpulover VIVO", "programming");
+			instructor1.setInstructorDetail(detail1);
+
 			// start a transaction
 			session.beginTransaction();
 
-			//get object
-			int id = 2;
-			InstructorDetail tempDetail=session.get(InstructorDetail.class, id);
-			System.out.println("Get detail: "+tempDetail);
-			
-			//get associated object by bi-directional
-			Instructor tempInstructor = tempDetail.getInstructor();
-			System.out.println("Get the associated instructor: "+ tempInstructor);
+			// save objects
+			session.save(instructor1); // this will also save detail1 if CascadeType.ALL or CascadeType.PERSIST
 
 			// commit transaction
 			session.getTransaction().commit();
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
-			//handle connection leak issue
+		} finally {
+			// handle connection leak issue
 			session.close();
 			factory.close();
 		}

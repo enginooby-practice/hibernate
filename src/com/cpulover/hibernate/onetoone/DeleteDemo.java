@@ -1,15 +1,13 @@
-package com.cpulover.hibernate.demo;
-
-import java.io.Serializable;
+package com.cpulover.hibernate.onetoone;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.cpulover.hibernate.demo.entity.Instructor;
-import com.cpulover.hibernate.demo.entity.InstructorDetail;
+import com.cpulover.hibernate.entity.Instructor;
+import com.cpulover.hibernate.entity.InstructorDetail;
 
-public class DeleteBidirectionalDemo {
+public class DeleteDemo {
 
 	public static void main(String[] args) {
 		// create session factory
@@ -23,18 +21,15 @@ public class DeleteBidirectionalDemo {
 			// start a transaction
 			session.beginTransaction();
 
-			// get object
-			int id = 3;
-			InstructorDetail tempDetail = session.get(InstructorDetail.class, id);
-			System.out.println("Get detail: " + tempDetail);
-			
-			//break bi-directional link to delete only instructorDetail without instructor
-			tempDetail.getInstructor().setInstructorDetail(null);
+			// get object by id
+			int id = 1;
+			Instructor tempInstructor = session.get(Instructor.class, id);
+			System.out.println("Get instructor: " + tempInstructor);
 
 			// delete object
-			if (tempDetail != null) {
-				session.delete(tempDetail); // this will also delete the associated "instructor" if
-											// CascadeType.ALL or CascadeType.REMOVE
+			if (tempInstructor != null) {
+				session.delete(tempInstructor); // this will also delete the associated "instructorDetail" if
+												// CascadeType.ALL or CascadeType.REMOVE
 			}
 
 			// commit transaction
