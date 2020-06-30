@@ -1,4 +1,4 @@
-# Topics practiced list
+# List of practiced topics
 - Configuration hibernate xml file
 - @Entity
 - @Table
