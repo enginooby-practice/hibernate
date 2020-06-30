@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity // annotate the class as an entity
-@Table(name = "instructor_detal") // map to table in database
+@Table(name = "instructor_detail") // map to table in the database
 public class InstructorDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
