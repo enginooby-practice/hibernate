@@ -22,8 +22,8 @@ public class CreateDemo {
 			// create objects and establish associations
 			Instructor instructor1 = new Instructor("Hieu", "Ngo", "justacpulover@gmail.com");
 			InstructorDetail detail1 = new InstructorDetail("Justa Cpulover VIVO", "programming");
-			Course course1=new Course("Java 2");
-			Course course2=new Course("Spring 2");
+			Course course1 = new Course("Java 2");
+			Course course2 = new Course("Spring 2");
 			instructor1.setInstructorDetail(detail1);
 			instructor1.addCourse(course1);
 			instructor1.addCourse(course2);
@@ -33,10 +33,11 @@ public class CreateDemo {
 
 			// save objects
 			session.persist(instructor1); // this will also save detail1 if CascadeType.ALL/PERSIST
-//			session.save(course1);
-//			session.save(course2);
+			// use persist instead of save can save associated course also (course1,
+			// course2)
+
 			instructor1.getCourses().forEach(System.out::println);
-			
+
 			// commit transaction
 			session.getTransaction().commit();
 		} catch (Exception e) {
