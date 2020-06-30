@@ -14,6 +14,9 @@
 - 'mappedBy' attribute: used in the class entity which does not contain the foreign key.
 - @JoinColum: used in the table class entity containing the foreign key.
 - Cascade types: CascadeType.ALL, CascadeType.PERSIST (save), CascadeType.REMOVE
+- Eager loading and Lazy loading; Fetch types: Fetch.LAZY, Fetch.EAGER
 - Handle connection leak issue: catch error and close session.
 - {Tip} Add convenience methods for bi-directional one-to-many relationship
 - {Tip} Use persist with CascadeType.ALL/PERSIST to save all associated objects in one-to-many relationship.
+- {Tip} Prefer Lazy loading then Eager loading.
+- {Note} To retrieve lazy data, need to open a Hibernate session (connect to the database).
