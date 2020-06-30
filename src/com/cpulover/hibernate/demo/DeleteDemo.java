@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 import com.cpulover.hibernate.demo.entity.Instructor;
 import com.cpulover.hibernate.demo.entity.InstructorDetail;
 
-public class CreateTest {
+public class DeleteDemo {
 
 	public static void main(String[] args) {
 		// create session factory
@@ -18,16 +18,19 @@ public class CreateTest {
 		Session session = factory.getCurrentSession();
 
 		try {
-			// create objects
-			Instructor instructor1 = new Instructor("Hieu", "Ngo", "justacpulover@gmail.com");
-			InstructorDetail detail1 = new InstructorDetail("Justa Cpulover VIVO", "programming");
-			instructor1.setInstructorDetail(detail1);
-
 			// start a transaction
 			session.beginTransaction();
 
-			// save objects
-			session.save(instructor1); // this will also save detail1 because of CascadeType.ALL
+			// get object by id
+			int id = 1;
+			Instructor tempInstructor = session.get(Instructor.class, id);
+			System.out.println("Get instructor: " + tempInstructor);
+
+			// delete object
+			if (tempInstructor != null) {
+				session.delete(tempInstructor); // this will also delete the associated "instructorDetail" because of
+												// CascadeType.ALL
+			}
 
 			// commit transaction
 			session.getTransaction().commit();

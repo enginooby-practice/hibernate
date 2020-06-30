@@ -1,5 +1,5 @@
 # List of practiced topics
-- Configuration hibernate xml file
+- Configure hibernate xml file (hibernate.cfg.xml)
 - CRUD features
 - @Entity
 - @Table
