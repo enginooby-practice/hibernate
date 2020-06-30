@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 
 import com.cpulover.hibernate.demo.entity.Student;
 
-public class CreateStudentTest {
+public class CreateTest {
 
 	public static void main(String[] args) {
 		//
