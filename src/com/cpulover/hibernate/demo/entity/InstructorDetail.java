@@ -1,10 +1,12 @@
 package com.cpulover.hibernate.demo.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity // annotate the class as an entity
@@ -18,6 +20,10 @@ public class InstructorDetail {
 	private String youtubeChannel;
 	@Column(name = "hobby")
 	private String hobby;
+	
+	//setup one-to-one bi-directional relationship
+	@OneToOne(mappedBy="instructorDetail", cascade=CascadeType.ALL)
+	private Instructor instructor;
 	
 	public InstructorDetail() {
 		
@@ -50,6 +56,14 @@ public class InstructorDetail {
 
 	public void setHobby(String hobby) {
 		this.hobby = hobby;
+	}
+
+	public Instructor getInstructor() {
+		return instructor;
+	}
+
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
 	}
 
 	@Override
