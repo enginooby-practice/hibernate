@@ -16,4 +16,4 @@
 - Cascade types: CascadeType.ALL, CascadeType.PERSIST (save), CascadeType.REMOVE
 - Handle connection leak issue: catch error and close session.
 - {Tip} Add convenience methods for bi-directional one-to-many relationship
-- {Tip} Use persist with CascadeType.ALL/PERSIST to save all assorciated objects in one-to-many relationship.
+- {Tip} Use persist with CascadeType.ALL/PERSIST to save all associated objects in one-to-many relationship.
