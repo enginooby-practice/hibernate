@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,8 +35,8 @@ public class Instructor {
 	private InstructorDetail instructorDetail;
 
 	// mapping one to many
-	@OneToMany(mappedBy = "instructor", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-			CascadeType.REFRESH })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "instructor", cascade = { CascadeType.DETACH, CascadeType.MERGE,
+			CascadeType.PERSIST, CascadeType.REFRESH })
 	private List<Course> courses;
 
 	public Instructor() {
@@ -47,12 +48,12 @@ public class Instructor {
 		this.lastName = lastName;
 		this.email = email;
 	}
-	
+
 	// add convenience methods for bi-directional one-to-many relationship
 	public void addCourse(Course tempCourse) {
-		if (courses==null) {
-			courses=new ArrayList<Course>();
-		} 
+		if (courses == null) {
+			courses = new ArrayList<Course>();
+		}
 		courses.add(tempCourse);
 		tempCourse.setInstructor(this);
 	}
@@ -96,7 +97,7 @@ public class Instructor {
 	public void setInstructorDetail(InstructorDetail instructorDetail) {
 		this.instructorDetail = instructorDetail;
 	}
-	
+
 	public List<Course> getCourses() {
 		return courses;
 	}
