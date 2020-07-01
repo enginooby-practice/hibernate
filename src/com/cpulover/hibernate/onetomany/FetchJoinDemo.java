@@ -1,16 +1,15 @@
 package com.cpulover.hibernate.onetomany;
 
-import java.io.Serializable;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import com.cpulover.hibernate.entity.Course;
 import com.cpulover.hibernate.entity.Instructor;
 import com.cpulover.hibernate.entity.InstructorDetail;
 
-public class EagerLazyDemo {
+public class FetchJoinDemo {
 
 	public static void main(String[] args) {
 		// create session factory
@@ -24,13 +23,17 @@ public class EagerLazyDemo {
 			// start a transaction
 			session.beginTransaction();
 
-			// get object
-			int id = 3;
-			Instructor tempInstructor = session.get(Instructor.class, id);
-			System.out.println("Get intrustor: " + tempInstructor);
+			// create query
+			Query<Instructor> query = session.createQuery(
+					"select i from Instructor i " + "JOIN FETCH i.courses " + "where i.id=:instructorId",
+					Instructor.class);
 
-			// Call getter method while session is still open to resolve Lazy loading issue
-			System.out.println(tempInstructor.getCourses());
+			// set parameter on the query
+			int id = 3;
+			query.setParameter("instructorId", id);
+
+			// execute query and get object
+			Instructor tempInstructor = query.getSingleResult();
 
 			// commit transaction
 			session.getTransaction().commit();
