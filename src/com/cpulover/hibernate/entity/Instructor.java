@@ -55,7 +55,7 @@ public class Instructor {
 			courses = new ArrayList<Course>();
 		}
 		courses.add(tempCourse);
-		tempCourse.setInstructor(this);
+		tempCourse.setInstructor(this); //imply the bi-directional relationship
 	}
 
 	public int getId() {
