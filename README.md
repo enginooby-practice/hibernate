@@ -13,7 +13,7 @@
 - @OneToOne: uni-directional (use @JoinColumn) and bi-directional (use 'mappedBy')
 - @OneToMany
 - 'mappedBy' attribute: used in the class entity which does not contain the foreign key.
-- @JoinColum: used in the table class entity containing the foreign key.
+- (?) @JoinColum: used in the table class entity containing the foreign key.
 - Cascade types: CascadeType.ALL, CascadeType.PERSIST (save), CascadeType.REMOVE
 - Eager loading and Lazy loading; Fetch types: Fetch.LAZY, Fetch.EAGER
 - Handle connection leak issue: catch error and close session.
@@ -23,3 +23,10 @@
 - Use persist with CascadeType.ALL/PERSIST to save all associated objects in one-to-many relationship.
 - Prefer Lazy loading then Eager loading.
 - To retrieve lazy data, need to open a Hibernate session (connect to the database).
+- Resolve Lazy loading issue (because of loading after closing session)
+  - Option 1: Call getter method while session is still open [EagerLazyDemo]
+  - Option 2: Use Hibernate query with HQL [hibernate.query.Query][FetchJoinDemo]
+
+## !
+- (?) Questionnable
+- [] Import, Class
