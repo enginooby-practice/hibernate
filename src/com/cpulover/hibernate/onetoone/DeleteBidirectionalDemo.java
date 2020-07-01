@@ -6,15 +6,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.cpulover.hibernate.entity.Course;
 import com.cpulover.hibernate.entity.Instructor;
 import com.cpulover.hibernate.entity.InstructorDetail;
+import com.cpulover.hibernate.entity.Review;
+import com.cpulover.hibernate.entity.Student;
 
 public class DeleteBidirectionalDemo {
 
 	public static void main(String[] args) {
 		// create session factory
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
-				.addAnnotatedClass(InstructorDetail.class).buildSessionFactory();
+				.addAnnotatedClass(Review.class).addAnnotatedClass(InstructorDetail.class)
+				.addAnnotatedClass(Course.class).addAnnotatedClass(Student.class).buildSessionFactory();
 
 		// create session
 		Session session = factory.getCurrentSession();
@@ -27,8 +31,8 @@ public class DeleteBidirectionalDemo {
 			int id = 3;
 			InstructorDetail tempDetail = session.get(InstructorDetail.class, id);
 			System.out.println("Get detail: " + tempDetail);
-			
-			//break bi-directional link to delete only instructorDetail without instructor
+
+			// break bi-directional link to delete only instructorDetail without instructor
 			tempDetail.getInstructor().setInstructorDetail(null);
 
 			// delete object
