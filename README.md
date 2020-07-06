@@ -1,9 +1,15 @@
 # List of practiced topics
+## Configuration and concepts
 - Configure hibernate xml file (hibernate.cfg.xml)
 - CRUD features
 - SessionFactory and Session
 - Start and commit a Transaction
-- Add no-arg constructor for entity class.
+- Cascade types: CascadeType.ALL, CascadeType.PERSIST (save), CascadeType.REMOVE
+- Eager loading and Lazy loading; Fetch types: Fetch.LAZY, Fetch.EAGER
+
+### Entity class
+- Add no-args constructor for entity class.
+- Add convenience methods for bi-directional one/many-to-tomany relationship.
 - *__@Entity__* [javax.persistence]
 - *__@Id__*
 - *__@GeneratedValue__*
@@ -20,13 +26,9 @@
   - *`fetch`* should be FetchType.LAZY
   - *`cascade`* should omit CascadeType.REMOVE
   - *__@JoinTable__* with *`joinColumns`* and *`inverseJoinColumns`* for each foreign key
-- Cascade types: CascadeType.ALL, CascadeType.PERSIST (save), CascadeType.REMOVE
-- Eager loading and Lazy loading; Fetch types: Fetch.LAZY, Fetch.EAGER
-
 
 ### Notes and Tips
 - Handle connection leak issue: catch error and close session.
-- Add convenience methods for bi-directional one/many-to-tomany relationship
 - Use persist() with CascadeType.ALL/PERSIST to save all associated objects.
 - Prefer Lazy loading then Eager loading.
 - To retrieve lazy data, a Hibernate session need to be open (connect to the database).
