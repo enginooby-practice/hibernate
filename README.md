@@ -4,22 +4,22 @@
 - SessionFactory and Session
 - Start and commit a Transaction
 - Add no-arg constructor for entity class.
-- @Entity [javax.persistence]
-- @Id
-- @GeneratedValue
+- *__@Entity__* [javax.persistence]
+- *__@Id__*
+- *__@GeneratedValue__*
   - GenerationType.IDENTITY
-- @Table: map to table in the database [javax.persistence]
-- @Column: map to column of the table
-- @OneToOne [Instructor/InstructorDetail]
-  - Uni-directional (use @JoinColumn) and bi-directional (use *`mappedBy`*)
+- *__@Table:__* map to table in the database [javax.persistence]
+- *__@Column:__* map to column of the table
+- *__@OneToOne__* [Instructor/InstructorDetail]
+  - Uni-directional (use *__@JoinColumn__*) and bi-directional (use *`mappedBy`*)
   - *`mappedBy`* attribute: used in the class entity which does not contain the foreign key.
-  -  @JoinColum: used in the table class entity containing the foreign key.
-- @OneToMany [Course/Review]
-  - Uni-directional: @JoinColumn used in the class entity which does not contain the foreign key.
-- @ManyToMany [Student/Course]
+  -  *__@JoinColum:__* used in the table class entity containing the foreign key.
+- *__@OneToMany__* [Course/Review]
+  - Uni-directional: *__@JoinColumn__* used in the class entity which does not contain the foreign key.
+- *__@ManyToMany__* [Student/Course]
   - *`fetch`* should be FetchType.LAZY
   - *`cascade`* should omit CascadeType.REMOVE
-  - @JoinTable with *`joinColumns`* and *`inverseJoinColumns`* for each foreign key
+  - *__@JoinTable__* with *`joinColumns`* and *`inverseJoinColumns`* for each foreign key
 - Cascade types: CascadeType.ALL, CascadeType.PERSIST (save), CascadeType.REMOVE
 - Eager loading and Lazy loading; Fetch types: Fetch.LAZY, Fetch.EAGER
 
@@ -36,4 +36,4 @@
 
 ### !
 - (?) Questionnable
-- [ ] Import, Class
+- [] Import, Class
