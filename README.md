@@ -4,7 +4,7 @@
 - SessionFactory and Session
 - Start and commit a Transaction
 - Add no-arg constructor for entity class.
-- @Entity [javax.persistence]
+- @Entity [javax.persistence]: map java class to database table.
 - @Id
 - @GeneratedValue
   - GenerationType.IDENTITY
