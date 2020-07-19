@@ -10,7 +10,7 @@
 - CRUD features
 - SessionFactory, Session and Transaction
 - Uni-directional and bi-directional relationship
-- Cascade types: CascadeType.ALL, CascadeType.PERSIST (save), CascadeType.REMOVE
+- Cascade types: CascadeType.ALL, CascadeType.PERSIST (save), CascadeType.REMOVE, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH
   - 📌 Use persist() with CascadeType.ALL/PERSIST to save all associated objects.
 - Eager loading and Lazy loading; Fetch types: Fetch.LAZY (prefer), Fetch.EAGER
   - To retrieve lazy data, a Hibernate session need to be open (connect to the database).
@@ -22,11 +22,11 @@
 
 
 ### Entity Class
-- Add no-args constructor for entity class.
-- Add convenience methods for bi-directional one/many-to-tomany relationship.
+- Add no-args constructor (required by Hibernate)
+- 📌 Add convenience methods for bi-directional one/many-to-many relationship 
+[[Instructor](https://github.com/cpulover-practice/hibernate/blob/master/src/com/cpulover/hibernate/entity/Instructor.java)]
 - *__@Entity__* [javax.persistence]
-- *__@Id__* and *__@GeneratedValue__* 
-  - Prefer GenerationType.IDENTITY)
+- *__@Id__* and *__@GeneratedValue__* (prefer GenerationType.IDENTITY)
 - *__@Table:__* map to table in the database [javax.persistence]
 - *__@Column:__* map to column of the table
 - *__@OneToOne__* 
